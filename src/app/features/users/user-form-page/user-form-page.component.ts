@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from "@angular/core";
+import { Component, OnInit, effect, inject, signal } from "@angular/core";
 import { UserFormComponent } from "../user-form/user-form.component";
 import { User } from "../../../shared/models/user";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -16,20 +16,27 @@ export class UserFormPageComponent implements OnInit {
   private facade = inject(UsersFacadeService);
   user = signal<User | null>(null);
   loading = this.facade.loading;
-
+  constructor() {
+    effect(() => {
+      if (this.facade.users().length) {
+        const id = this.activatedRoute.snapshot.paramMap.get("id");
+        if (id) {
+          if (!Number.isNaN(+id)) {
+            const foundUser = this.facade.users().find(user => user.id === +id);
+            if (!foundUser) {
+              this.router.navigate(["/users"]);
+              return;
+            }
+            this.user.set(foundUser);
+          }
+        }
+      } else {
+        this.facade.loadUsers();
+      }
+    });
+  }
   ngOnInit(): void {
     //TODO: Move this to route level
-    const id = this.activatedRoute.snapshot.paramMap.get("id");
-    if (id) {
-      if (!Number.isNaN(+id)) {
-        const foundUser = this.facade.users().find(user => user.id === +id);
-        if (!foundUser) {
-          this.router.navigate(["/users"]);
-          return;
-        }
-        this.user.set(foundUser);
-      }
-    }
   }
 
   handleSave(user: Partial<User>) {
