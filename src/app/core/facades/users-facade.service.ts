@@ -1,4 +1,4 @@
-import { inject, Injectable } from "@angular/core";
+import { computed, inject, Injectable } from "@angular/core";
 import { UserStore } from "../stores/users.store";
 import { UsersService } from "../services/users.service";
 import { User } from "../../shared/models/user";
@@ -12,6 +12,10 @@ export class UsersFacadeService {
   user = this.store.user.asReadonly();
   loading = this.store.loading.asReadonly();
   error = this.store.error.asReadonly();
+
+  isLoggedInUserAdmin = computed(() => {
+    return this.user()?.role === "admin";
+  });
 
   loadUsers(): void {
     this.store.setLoading(true);

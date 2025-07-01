@@ -1,6 +1,7 @@
-import { Component, input, InputSignal, output, OutputEmitterRef } from "@angular/core";
+import { Component, inject, input, output, OutputEmitterRef } from "@angular/core";
 import { User } from "../../../shared/models/user";
 import { MatTableModule } from "@angular/material/table";
+import { UsersFacadeService } from "../../../core/facades/users-facade.service";
 
 @Component({
   selector: "app-users-list",
@@ -9,6 +10,7 @@ import { MatTableModule } from "@angular/material/table";
   styleUrl: "./users-list.component.scss",
 })
 export class UsersListComponent {
+  facade = inject(UsersFacadeService);
   users = input<User[]>([]);
   displayedColumns: string[] = ["username", "role", "editable"];
 
