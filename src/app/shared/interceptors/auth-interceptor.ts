@@ -3,7 +3,7 @@ import { AuthService } from "../../core/services/auth.service";
 import { inject } from "@angular/core";
 import { delay } from "rxjs";
 
-const DELAY: number = 1000;
+const DELAY: number = 500;
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
   const authToken = inject(AuthService).token();
   if (req.url.includes("/login")) {
