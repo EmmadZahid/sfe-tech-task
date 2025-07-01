@@ -2,6 +2,13 @@
   <mat-form-field appearance="fill">
     <mat-label>Username</mat-label>
     <input matInput formControlName="username" />
+    @if (form.get("username")?.hasError("required") || form.get("username")?.hasError("whitespace")) {
+    <mat-error>Please enter username</mat-error>
+    } @else if (form.get("username")?.hasError("nospace")) {
+    <mat-error>No spaces allowed</mat-error>
+    } @else if (form.get("username")?.hasError("forbiddenWord")) {
+    <mat-error>Username should be a real name</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -10,11 +17,19 @@
       <mat-option value="admin">Admin</mat-option>
       <mat-option value="user">User</mat-option>
     </mat-select>
+    @if (form.get("role")?.hasError("required")) {
+    <mat-error>Please select a role</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Password</mat-label>
     <input matInput type="password" formControlName="password" />
+    @if (form.get("password")?.hasError("required")) {
+    <mat-error>Please set a password</mat-error>
+    } @else if (form.get("password")?.hasError("minlength")) {
+    <mat-error>Min length should be 6 characters</mat-error>
+    }
   </mat-form-field>
 
   <div class="actions">

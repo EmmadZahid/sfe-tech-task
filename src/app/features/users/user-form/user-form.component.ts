@@ -6,6 +6,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
+import { whitespaceValidator } from "../../../shared/validators/white-space-validator";
+import { nospaceValidator } from "../../../shared/validators/no-space-validator";
+import { forbiddenWordValidator } from "../../../shared/validators/forbidden-word-validator";
 
 @Component({
   selector: "app-user-form",
@@ -22,9 +25,9 @@ export class UserFormComponent {
   private fb = inject(FormBuilder);
 
   form = this.fb.group({
-    username: ["", Validators.required],
-    role: ["", Validators.required],
-    password: [""],
+    username: ["", [Validators.required, whitespaceValidator, nospaceValidator, forbiddenWordValidator(["test"])]],
+    role: ["", [Validators.required]],
+    password: ["", [Validators.required, Validators.minLength(6)]],
   });
 
   submit(): void {
