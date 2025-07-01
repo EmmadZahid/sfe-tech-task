@@ -6,6 +6,7 @@ const USER_KEY = "user";
 export class UserStore {
   users = signal<User[]>([]);
   user = signal<User | null>(null);
+  loggedInUser = signal<User | null>(null);
   loading = signal(false);
   updating = signal(false);
   error = signal("");
@@ -24,6 +25,10 @@ export class UserStore {
 
   setUser(user: User | null) {
     this.user.set(user);
+  }
+
+  setLoggedInUser(user: User | null) {
+    this.loggedInUser.set(user);
     if (user) {
       localStorage.setItem(USER_KEY, JSON.stringify(user));
     } else {

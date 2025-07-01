@@ -1,6 +1,6 @@
 <header>
   <h2>{{ title }}</h2>
-  @if(authService.token()){
+  @if(token()){
   <a href="#" (click)="onLogoutClick($event)">Logout</a>
   }
 </header>

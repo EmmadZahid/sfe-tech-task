@@ -20,7 +20,7 @@
       }
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || authenticating()">Login</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading()">Login</button>
 
     @if (error()) {
     <p class="app-error">{{ error() }}</p>

@@ -2,21 +2,26 @@ import { effect, inject, Injectable, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
 import { AuthResponse } from "../../shared/models/auth";
-import { UserStore } from "../stores/users.store";
 
 const TOKEN_KEY = "token";
 @Injectable({ providedIn: "root" })
 export class AuthService {
   private readonly http: HttpClient = inject(HttpClient);
-  private store = inject(UserStore);
   private readonly apiUrl: string = "api/auth";
-  private _token = signal<string>("");
-  token = this._token.asReadonly();
+  token = signal<string>("");
 
   constructor() {
     try {
-      this._token.set(localStorage.getItem(TOKEN_KEY) ?? "");
+      this.token.set(localStorage.getItem(TOKEN_KEY) ?? "");
     } catch (error) {}
+
+    effect(() => {
+      if (this.token()) {
+        localStorage.setItem(TOKEN_KEY, this.token());
+      } else {
+        localStorage.removeItem(TOKEN_KEY);
+      }
+    });
   }
 
   login(username: string, password: string): Observable<AuthResponse> {
@@ -27,18 +32,12 @@ export class AuthService {
       })
       .pipe(
         tap(response => {
-          this._token.set(response.token);
-          localStorage.setItem(TOKEN_KEY, response.token);
-          this.store.setUser(response.user);
+          this.token.set(response.token);
         })
       );
   }
 
   logout(): void {
-    this.store.setUser(null);
-    localStorage.removeItem(TOKEN_KEY);
-    //This is a dirty hack for now
-    //Need to reset all the services and user router to navigate to auth page
-    location.reload();
+    this.token.set("");
   }
 }

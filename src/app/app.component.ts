@@ -1,6 +1,6 @@
 import { Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { AuthService } from "./core/services/auth.service";
+import { AuthFacadeService } from "./core/facades/auth-facade.service";
 
 @Component({
   selector: "app-root",
@@ -10,11 +10,12 @@ import { AuthService } from "./core/services/auth.service";
 })
 export class AppComponent {
   title = "SFE Tech Task";
-  authService = inject(AuthService);
+  authFacade = inject(AuthFacadeService);
+  token = this.authFacade.token;
   constructor() {}
 
   onLogoutClick(event: MouseEvent): void {
     event.preventDefault();
-    this.authService.logout();
+    this.authFacade.logout();
   }
 }

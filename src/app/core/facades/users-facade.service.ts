@@ -11,6 +11,7 @@ export class UsersFacadeService {
 
   users = this.store.users.asReadonly();
   user = this.store.user.asReadonly();
+  loggedInUser = this.store.loggedInUser.asReadonly();
   loading = this.store.loading.asReadonly();
   updating = this.store.updating.asReadonly();
   error = this.store.error.asReadonly();

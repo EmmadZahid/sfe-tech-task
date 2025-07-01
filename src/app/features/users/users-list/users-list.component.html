@@ -13,7 +13,7 @@
   <ng-container matColumnDef="editable">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let user">
-      @if (facade.isLoggedInUserAdmin() || facade.user()?.id == user.id) {
+      @if (isLoggedInUserAdmin() || loggedInUser()?.id == user.id) {
       <a href="#" (click)="onEditClick($event, user.id)">Edit</a>
       }
     </td>

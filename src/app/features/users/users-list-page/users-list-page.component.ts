@@ -11,11 +11,11 @@ import { UsersFacadeService } from "../../../core/facades/users-facade.service";
   styleUrl: "./users-list-page.component.scss",
 })
 export class UsersListPageComponent implements OnInit {
-  facade = inject(UsersFacadeService);
+  usersfacade = inject(UsersFacadeService);
   router = inject(Router);
 
   ngOnInit(): void {
-    this.facade.loadUsers();
+    this.usersfacade.loadUsers();
   }
 
   goToNew(): void {

@@ -10,7 +10,9 @@ import { UsersFacadeService } from "../../../core/facades/users-facade.service";
   styleUrl: "./users-list.component.scss",
 })
 export class UsersListComponent {
-  facade = inject(UsersFacadeService);
+  usersfacade = inject(UsersFacadeService);
+  loggedInUser = this.usersfacade.loggedInUser;
+  isLoggedInUserAdmin = this.usersfacade.isLoggedInUserAdmin;
   users = input<User[]>([]);
   displayedColumns: string[] = ["username", "role", "editable"];
 

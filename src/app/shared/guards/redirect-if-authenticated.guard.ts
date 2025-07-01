@@ -1,11 +1,11 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
-import { AuthService } from "../../core/services/auth.service";
+import { AuthFacadeService } from "../../core/facades/auth-facade.service";
 
 export const redirectIfAuthenticatedGuard: CanActivateFn = () => {
-  const authService = inject(AuthService);
+  const token = inject(AuthFacadeService).token();
   const router = inject(Router);
-  if (authService.token()) {
+  if (token) {
     router.navigateByUrl("/users");
     return false;
   }
