@@ -7,7 +7,6 @@ import { Router } from "@angular/router";
 import { MatButton } from "@angular/material/button";
 import { nospaceValidator } from "../../../shared/validators/no-space-validator";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { forbiddenWordValidator } from "../../../shared/validators/forbidden-word-validator";
 import { whitespaceValidator } from "../../../shared/validators/white-space-validator";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { AuthResponse } from "../../../shared/models/auth";
@@ -36,7 +35,7 @@ export class LoginPageComponent implements OnInit {
   authenticating: WritableSignal<boolean> = signal(false);
   private destroyRef = inject(DestroyRef);
   form = this.fb.group({
-    username: ["", [Validators.required, whitespaceValidator, nospaceValidator, forbiddenWordValidator(["test"])]],
+    username: ["", [Validators.required, whitespaceValidator, nospaceValidator]],
     password: ["", [Validators.required]],
   });
 

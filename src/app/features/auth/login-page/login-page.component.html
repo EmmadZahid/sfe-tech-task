@@ -9,8 +9,6 @@
       <mat-error>Please enter username</mat-error>
       } @else if (form.get("username")?.hasError("nospace")) {
       <mat-error>No spaces allowed</mat-error>
-      } @else if (form.get("username")?.hasError("forbiddenWord")) {
-      <mat-error>Username should be a real name</mat-error>
       }
     </mat-form-field>
 
