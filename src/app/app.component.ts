@@ -12,7 +12,6 @@ export class AppComponent {
   title = "SFE Tech Task";
   router = inject(Router);
   authService = inject(AuthService);
-  isLoggedIn = this.authService.token;
   constructor() {
     if (this.authService.token()) {
       this.router.navigate(["users"]);
@@ -22,8 +21,5 @@ export class AppComponent {
   onLogoutClick(event: MouseEvent): void {
     event.preventDefault();
     this.authService.logout();
-    //This is a dirty hack for now
-    //Need to reset all the services and user router to navigate to auth page
-    location.reload();
   }
 }
