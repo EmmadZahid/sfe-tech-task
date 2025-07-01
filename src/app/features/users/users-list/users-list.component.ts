@@ -10,7 +10,7 @@ import { MatTableModule } from "@angular/material/table";
 })
 export class UsersListComponent {
   users = input<User[]>([]);
-  displayedColumns: string[] = ["username", "role", "editAble"];
+  displayedColumns: string[] = ["username", "role", "editable"];
 
   edit: OutputEmitterRef<number> = output();
 
