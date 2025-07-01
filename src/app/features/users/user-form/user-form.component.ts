@@ -1,4 +1,4 @@
-import { Component, inject, input, output, OutputEmitterRef } from "@angular/core";
+import { Component, effect, inject, input, output, OutputEmitterRef } from "@angular/core";
 import { User } from "../../../shared/models/user";
 import { CommonModule } from "@angular/common";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
@@ -23,12 +23,22 @@ export class UserFormComponent {
   cancel: OutputEmitterRef<void> = output();
 
   private fb = inject(FormBuilder);
-
   form = this.fb.group({
     username: ["", [Validators.required, whitespaceValidator, nospaceValidator, forbiddenWordValidator(["test"])]],
     role: ["", [Validators.required]],
     password: ["", [Validators.required, Validators.minLength(6)]],
   });
+  constructor() {
+    effect(() => {
+      const user = this.user();
+      if (user) {
+        this.form.patchValue({
+          username: user.username,
+          role: user.role,
+        });
+      }
+    });
+  }
 
   submit(): void {
     if (this.form.valid) {
