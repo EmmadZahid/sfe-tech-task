@@ -7,7 +7,9 @@ export class UserStore {
   users = signal<User[]>([]);
   user = signal<User | null>(null);
   loading = signal(false);
+  updating = signal(false);
   error = signal("");
+  updatingError = signal("");
 
   constructor() {
     try {
@@ -33,8 +35,16 @@ export class UserStore {
     this.loading.set(value);
   }
 
+  setUpdating(value: boolean) {
+    this.updating.set(value);
+  }
+
   setError(message: string) {
     this.error.set(message);
+  }
+
+  setUpdatingError(message: string) {
+    this.updatingError.set(message);
   }
 
   upsertUser(user: User) {

@@ -1,8 +1,9 @@
-import { Component, OnInit, effect, inject, signal } from "@angular/core";
+import { Component, DestroyRef, OnInit, effect, inject, signal } from "@angular/core";
 import { UserFormComponent } from "../user-form/user-form.component";
 import { User } from "../../../shared/models/user";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UsersFacadeService } from "../../../core/facades/users-facade.service";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
   selector: "app-user-form-page",
@@ -16,6 +17,8 @@ export class UserFormPageComponent implements OnInit {
   private facade = inject(UsersFacadeService);
   user = signal<User | null>(null);
   loading = this.facade.loading;
+  updating = this.facade.updating;
+  private destroyRef = inject(DestroyRef);
   constructor() {
     effect(() => {
       if (this.facade.users().length) {
@@ -40,8 +43,14 @@ export class UserFormPageComponent implements OnInit {
   }
 
   handleSave(user: Partial<User>) {
-    this.facade.saveUser(user);
-    this.goBack();
+    this.facade
+      .saveUser(user)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: saved => {
+          this.goBack();
+        },
+      });
   }
 
   goBack(): void {
