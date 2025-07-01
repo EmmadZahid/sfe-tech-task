@@ -18,6 +18,7 @@ import { forbiddenWordValidator } from "../../../shared/validators/forbidden-wor
 })
 export class UserFormComponent {
   user = input<User | null>();
+  disableSave = input<boolean>(false);
 
   save: OutputEmitterRef<Partial<User>> = output();
   cancel: OutputEmitterRef<void> = output();
