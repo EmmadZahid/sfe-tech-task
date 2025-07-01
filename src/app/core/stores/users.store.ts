@@ -1,6 +1,7 @@
-import { Injectable, signal } from "@angular/core";
+import { Injectable, effect, signal } from "@angular/core";
 import { User } from "../../shared/models/user";
 
+const USER_KEY = "user";
 @Injectable({ providedIn: "root" })
 export class UserStore {
   users = signal<User[]>([]);
@@ -8,12 +9,24 @@ export class UserStore {
   loading = signal(false);
   error = signal("");
 
+  constructor() {
+    try {
+      const savedUser = JSON.parse(localStorage.getItem(USER_KEY) ?? "{}");
+      if (Object.entries(savedUser).length) this.setUser(savedUser);
+    } catch (error) {}
+  }
+
   setUsers(newUsers: User[]) {
     this.users.set(newUsers);
   }
 
-  setUser(newUser: User) {
-    this.user.set(newUser);
+  setUser(user: User | null) {
+    this.user.set(user);
+    if (user) {
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+    } else {
+      localStorage.removeItem(USER_KEY);
+    }
   }
 
   setLoading(value: boolean) {
