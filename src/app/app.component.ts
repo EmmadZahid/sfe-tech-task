@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { Component, inject } from "@angular/core";
+import { Router, RouterOutlet } from "@angular/router";
+import { AuthService } from "./core/services/auth.service";
 
 @Component({
   selector: "app-root",
@@ -9,4 +10,11 @@ import { RouterOutlet } from "@angular/router";
 })
 export class AppComponent {
   title = "SFE Tech Task";
+  router = inject(Router);
+  authService = inject(AuthService);
+  constructor() {
+    if (this.authService.token) {
+      this.router.navigate(["users"]);
+    }
+  }
 }
