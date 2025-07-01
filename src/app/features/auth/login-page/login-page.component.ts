@@ -5,6 +5,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { MatButton } from '@angular/material/button';
+import { nospaceValidator } from '../../../shared/validators/no-space-validator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { forbiddenWordValidator } from '../../../shared/validators/forbidden-word-validator';
+import { whitespaceValidator } from '../../../shared/validators/white-space-validator';
 
 @Component({
   selector: 'app-login-page',
@@ -14,6 +18,7 @@ import { MatButton } from '@angular/material/button';
     MatLabel,
     MatFormField,
     MatCard,
+    MatFormFieldModule,
     ReactiveFormsModule,
     MatButton
   ],
@@ -26,8 +31,8 @@ export class LoginPageComponent {
   error: WritableSignal<string> = signal('');
 
   form = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required]
+    username: ['', [Validators.required,whitespaceValidator,nospaceValidator, forbiddenWordValidator(["test"])]],
+    password: ['', [Validators.required]]
   });
 
   submit(): void {
