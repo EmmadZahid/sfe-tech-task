@@ -30,6 +30,7 @@ import { AuthResponse } from "../../../shared/models/auth";
 export class LoginPageComponent {
   private fb: FormBuilder = inject(FormBuilder);
   private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
   error: WritableSignal<string> = signal("");
   authenticating: WritableSignal<boolean> = signal(false);
 
@@ -43,6 +44,7 @@ export class LoginPageComponent {
     this.authService.login(this.form.value.username ?? "", this.form.value.password ?? "").subscribe({
       next: (res: AuthResponse) => {
         this.authenticating.set(false);
+        this.router.navigate(["users"]);
       },
       error: (errRes: HttpErrorResponse) => {
         this.error.set(errRes.error?.message || "Some error occurred");
