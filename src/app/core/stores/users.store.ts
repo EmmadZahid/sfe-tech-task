@@ -33,6 +33,10 @@ export class UserStore {
       const updated = [...current];
       updated[index] = user;
       this.users.set(updated);
+      //Updating the current user
+      if (this.user()?.id === user.id) {
+        this.setUser({ ...user, password: undefined });
+      }
     }
   }
 }
