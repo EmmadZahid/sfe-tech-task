@@ -1,6 +1,8 @@
 <div class="header">
   <h2>Users</h2>
+  @if (facade.isLoggedInUserAdmin()) {
   <button mat-raised-button color="primary" (click)="goToNew()">Add User</button>
+  }
 </div>
 @if (!facade.loading()) {
 <app-users-list [users]="facade.users()" (edit)="goToEdit($event)" />
