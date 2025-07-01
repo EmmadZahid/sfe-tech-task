@@ -1,9 +1,9 @@
-import { inject, Injectable } from '@angular/core';
-import { UserStore } from '../stores/users.store';
-import { UsersService } from '../services/users.service';
-import { User } from '../../shared/models/user';
+import { inject, Injectable } from "@angular/core";
+import { UserStore } from "../stores/users.store";
+import { UsersService } from "../services/users.service";
+import { User } from "../../shared/models/user";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class UsersFacadeService {
   private store = inject(UserStore);
   private api = inject(UsersService);
@@ -18,13 +18,13 @@ export class UsersFacadeService {
     this.api.getUsers().subscribe({
       next: users => {
         this.store.setUsers(users);
-        this.store.setError('');
+        this.store.setError("");
         this.store.setLoading(false);
       },
       error: err => {
-        this.store.setError('Failed to load users');
+        this.store.setError("Failed to load users");
         this.store.setLoading(false);
-      }
+      },
     });
   }
 
@@ -33,14 +33,14 @@ export class UsersFacadeService {
     this.store.setLoading(true);
 
     action.subscribe({
-      next: (saved) => {
+      next: saved => {
         this.store.upsertUser(saved);
         this.store.setLoading(false);
       },
       error: () => {
-        this.store.setError('Failed to save user');
+        this.store.setError("Failed to save user");
         this.store.setLoading(false);
-      }
+      },
     });
   }
 }

@@ -1,12 +1,12 @@
-import { Injectable, signal } from '@angular/core';
-import { User } from '../../shared/models/user';
+import { Injectable, signal } from "@angular/core";
+import { User } from "../../shared/models/user";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class UserStore {
   users = signal<User[]>([]);
   user = signal<User | null>(null);
   loading = signal(false);
-  error = signal('');
+  error = signal("");
 
   setUsers(newUsers: User[]) {
     this.users.set(newUsers);

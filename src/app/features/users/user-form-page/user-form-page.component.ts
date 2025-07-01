@@ -1,16 +1,14 @@
-import { Component, inject } from '@angular/core';
-import { UserFormComponent } from '../user-form/user-form.component';
-import { User } from '../../../shared/models/user';
-import { Router } from '@angular/router';
-import { UsersFacadeService } from '../../../core/facades/users-facade.service';
+import { Component, inject } from "@angular/core";
+import { UserFormComponent } from "../user-form/user-form.component";
+import { User } from "../../../shared/models/user";
+import { Router } from "@angular/router";
+import { UsersFacadeService } from "../../../core/facades/users-facade.service";
 
 @Component({
-  selector: 'app-user-form-page',
-  imports: [
-    UserFormComponent
-  ],
-  templateUrl: './user-form-page.component.html',
-  styleUrl: './user-form-page.component.scss'
+  selector: "app-user-form-page",
+  imports: [UserFormComponent],
+  templateUrl: "./user-form-page.component.html",
+  styleUrl: "./user-form-page.component.scss",
 })
 export class UserFormPageComponent {
   private router = inject(Router);
@@ -25,6 +23,6 @@ export class UserFormPageComponent {
   }
 
   goBack(): void {
-    this.router.navigate(['/users']);
+    this.router.navigate(["/users"]);
   }
 }
