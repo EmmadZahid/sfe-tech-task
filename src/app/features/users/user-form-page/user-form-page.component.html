@@ -1,7 +1,13 @@
 <h2>{{ user()?.id ? "Edit" : "Create" }} User</h2>
 
-@if (!loading()) {
-<app-user-form [user]="user()" (save)="handleSave($event)" (cancel)="goBack()" [disableSave]="updating()" />
+@if (!facade.loading) { @if(facade.error()){
+<p class="app-error">{{ facade.error() }}</p>
+<button mat-flat-button color="primary" (click)="goBack()">Go Back</button>
 } @else {
+
+<app-user-form [user]="user()" (save)="handleSave($event)" (cancel)="goBack()" [disableSave]="facade.updating()" />
+} } @else {
 <p>Loading...</p>
+} @if(facade.updatingError()){
+<p class="app-error">{{ facade.updatingError() }}</p>
 }

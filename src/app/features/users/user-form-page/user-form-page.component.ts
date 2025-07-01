@@ -4,20 +4,19 @@ import { User } from "../../../shared/models/user";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UsersFacadeService } from "../../../core/facades/users-facade.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: "app-user-form-page",
-  imports: [UserFormComponent],
+  imports: [UserFormComponent, MatButtonModule],
   templateUrl: "./user-form-page.component.html",
   styleUrl: "./user-form-page.component.scss",
 })
 export class UserFormPageComponent implements OnInit {
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
-  private facade = inject(UsersFacadeService);
+  facade = inject(UsersFacadeService);
   user = signal<User | null>(null);
-  loading = this.facade.loading;
-  updating = this.facade.updating;
   private destroyRef = inject(DestroyRef);
   constructor() {
     effect(() => {

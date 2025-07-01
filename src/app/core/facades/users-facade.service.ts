@@ -14,6 +14,7 @@ export class UsersFacadeService {
   loading = this.store.loading.asReadonly();
   updating = this.store.updating.asReadonly();
   error = this.store.error.asReadonly();
+  updatingError = this.store.updatingError.asReadonly();
 
   isLoggedInUserAdmin = computed(() => {
     return this.user()?.role === "admin";

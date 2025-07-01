@@ -4,8 +4,11 @@
   <button mat-raised-button color="primary" (click)="goToNew()">Add User</button>
   }
 </div>
-@if (!facade.loading()) {
+@if (!facade.loading()) { @if(facade.error()){
+<p class="app-error">{{ facade.error() }}</p>
+} @else{
+
 <app-users-list [users]="facade.users()" (edit)="goToEdit($event)" />
-} @else {
+} } @else {
 <p>Loading...</p>
 }
