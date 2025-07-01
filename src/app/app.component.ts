@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { Router, RouterOutlet } from "@angular/router";
+import { RouterOutlet } from "@angular/router";
 import { AuthService } from "./core/services/auth.service";
 
 @Component({
@@ -10,13 +10,8 @@ import { AuthService } from "./core/services/auth.service";
 })
 export class AppComponent {
   title = "SFE Tech Task";
-  router = inject(Router);
   authService = inject(AuthService);
-  constructor() {
-    if (this.authService.token()) {
-      this.router.navigate(["users"]);
-    }
-  }
+  constructor() {}
 
   onLogoutClick(event: MouseEvent): void {
     event.preventDefault();
