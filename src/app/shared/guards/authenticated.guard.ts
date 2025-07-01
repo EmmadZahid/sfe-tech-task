@@ -6,6 +6,6 @@ import { AuthService } from "../../core/services/auth.service";
 export class AuthenticatedGuard implements CanActivate {
   authService: AuthService = inject(AuthService);
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return !!this.authService.token;
+    return !!this.authService.token();
   }
 }
