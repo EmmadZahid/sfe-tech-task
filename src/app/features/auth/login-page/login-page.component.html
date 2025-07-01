@@ -23,7 +23,7 @@
     <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || authenticating()">Login</button>
 
     @if (error()) {
-    <p>{{ error() }}</p>
+    <p class="app-error">{{ error() }}</p>
     }
   </form>
 </mat-card>
