@@ -1,7 +1,7 @@
-import { Component, inject } from "@angular/core";
+import { Component, OnInit, inject, signal } from "@angular/core";
 import { UserFormComponent } from "../user-form/user-form.component";
 import { User } from "../../../shared/models/user";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UsersFacadeService } from "../../../core/facades/users-facade.service";
 
 @Component({
@@ -10,12 +10,27 @@ import { UsersFacadeService } from "../../../core/facades/users-facade.service";
   templateUrl: "./user-form-page.component.html",
   styleUrl: "./user-form-page.component.scss",
 })
-export class UserFormPageComponent {
+export class UserFormPageComponent implements OnInit {
   private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
   private facade = inject(UsersFacadeService);
-
-  user = this.facade.user;
+  user = signal<User | null>(null);
   loading = this.facade.loading;
+
+  ngOnInit(): void {
+    //TODO: Move this to route level
+    const id = this.activatedRoute.snapshot.paramMap.get("id");
+    if (id) {
+      if (!Number.isNaN(+id)) {
+        const foundUser = this.facade.users().find(user => user.id === +id);
+        if (!foundUser) {
+          this.router.navigate(["/users"]);
+          return;
+        }
+        this.user.set(foundUser);
+      }
+    }
+  }
 
   handleSave(user: Partial<User>) {
     this.facade.saveUser(user);
