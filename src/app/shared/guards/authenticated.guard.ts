@@ -4,6 +4,11 @@ import { AuthService } from "../../core/services/auth.service";
 
 export const authenticatedGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
+  const router = inject(Router);
+  if (!authService.token()) {
+    router.navigateByUrl("/auth");
+    return false;
+  }
 
-  return !!authService.token();
+  return true;
 };
