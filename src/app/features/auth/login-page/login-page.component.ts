@@ -9,6 +9,8 @@ import { nospaceValidator } from "../../../shared/validators/no-space-validator"
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { forbiddenWordValidator } from "../../../shared/validators/forbidden-word-validator";
 import { whitespaceValidator } from "../../../shared/validators/white-space-validator";
+import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
+import { AuthResponse } from "../../../shared/models/auth";
 
 @Component({
   selector: "app-login-page",
@@ -27,13 +29,25 @@ import { whitespaceValidator } from "../../../shared/validators/white-space-vali
 })
 export class LoginPageComponent {
   private fb: FormBuilder = inject(FormBuilder);
-
+  private authService: AuthService = inject(AuthService);
   error: WritableSignal<string> = signal("");
+  authenticating: WritableSignal<boolean> = signal(false);
 
   form = this.fb.group({
     username: ["", [Validators.required, whitespaceValidator, nospaceValidator, forbiddenWordValidator(["test"])]],
     password: ["", [Validators.required]],
   });
 
-  submit(): void {}
+  submit(): void {
+    this.authenticating.set(true);
+    this.authService.login(this.form.value.username ?? "", this.form.value.password ?? "").subscribe({
+      next: (res: AuthResponse) => {
+        this.authenticating.set(false);
+      },
+      error: (errRes: HttpErrorResponse) => {
+        this.error.set(errRes.error?.message || "Some error occurred");
+        this.authenticating.set(false);
+      },
+    });
+  }
 }
