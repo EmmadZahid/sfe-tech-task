@@ -19,6 +19,7 @@ export class UsersListPageComponent implements OnInit {
   }
 
   goToNew(): void {
+    this.usersFacade.resetSaved();
     this.router.navigate(["/users/create"]);
   }
 

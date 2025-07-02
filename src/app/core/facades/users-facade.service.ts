@@ -73,5 +73,6 @@ export class UsersFacadeService {
     this.store.setSaved(false);
     this.store.setUser(null);
     this.store.setSavingError("");
+    this.store.setSaving(false);
   }
 }
