@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
-import { AdminGuard } from "../../shared/guards/admin.guard";
 import { UserResolver } from "../../core/resolvers/user-resolver";
+import { editGuard } from "../../shared/guards/edit.guard";
+import { adminGuard } from "../../shared/guards/admin.guard";
 
 export const USERS_PATH = "users";
 
@@ -11,7 +12,7 @@ export const USERS_ROUTES: Routes = [
   },
   {
     path: "create",
-    canActivate: [AdminGuard],
+    canActivate: [adminGuard],
     data: {
       mode: "create",
     },
@@ -25,6 +26,7 @@ export const USERS_ROUTES: Routes = [
     data: {
       mode: "edit",
     },
+    canActivate: [editGuard],
     loadComponent: () => import("./user-form-page/user-form-page.component").then(c => c.UserFormPageComponent),
   },
 ];
