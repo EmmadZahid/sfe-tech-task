@@ -10,11 +10,17 @@ const anotherUser: User = { id: 2, username: "bob", password: "pw", role: "user"
 describe("UserStore", () => {
   let store: UserStore;
 
-  const localStorageGet = spyOn(localStorage, "getItem");
-  const localStorageSet = spyOn(localStorage, "setItem");
-  const localStorageRemove = spyOn(localStorage, "removeItem");
+  let localStorageGet: jasmine.Spy;
+  let localStorageSet: jasmine.Spy;
+  let localStorageRemove: jasmine.Spy;
 
   beforeEach(() => {
+    localStorage.clear();
+
+    localStorageGet = spyOn(localStorage, "getItem");
+    localStorageSet = spyOn(localStorage, "setItem");
+    localStorageRemove = spyOn(localStorage, "removeItem");
+
     TestBed.resetTestingModule();
   });
 
