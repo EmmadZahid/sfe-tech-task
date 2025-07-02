@@ -1,5 +1,5 @@
 import { signal } from "@angular/core";
-import { User } from "../../app/shared/models/user";
+import { User } from "../../../app/shared/models/user";
 
 export class MockUserStore {
   users = signal<User[]>([]);

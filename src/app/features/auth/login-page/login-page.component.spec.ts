@@ -5,8 +5,8 @@ import { Router } from "@angular/router";
 import { signal } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { AuthFacadeService } from "../../../core/facades/auth-facade.service";
-import { MockAuthFacadeService } from "../../../../testing/mocks/mock-auth-facade.service";
-import { MockRouter } from "../../../../testing/mocks/mock-router";
+import { MockAuthFacadeService } from "../../../../testing/mocks/services/mock-auth-facade.service";
+import { MockRouter } from "../../../../testing/mocks/services/mock-router";
 
 describe("LoginPageComponent", () => {
   let component: LoginPageComponent;

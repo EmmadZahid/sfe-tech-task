@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { AppComponent } from "./app.component";
 import { By } from "@angular/platform-browser";
 import { AuthFacadeService } from "./core/facades/auth-facade.service";
-import { MockAuthFacadeService } from "../testing/mocks/mock-auth-facade.service";
+import { MockAuthFacadeService } from "../testing/mocks/services/mock-auth-facade.service";
 
 describe("AppComponent", () => {
   let fixture: ComponentFixture<AppComponent>;

@@ -7,8 +7,8 @@ import { By } from "@angular/platform-browser";
 import { signal } from "@angular/core";
 import { MockUsersListComponent } from "../../../../testing/mocks/components/mock-users-list.component";
 import { MockAppSpinnerComponent } from "../../../../testing/mocks/components/mock-app-spinner.component";
-import { MockUsersFacade } from "../../../../testing/mocks/mock-users-facade.service";
-import { MockRouter } from "../../../../testing/mocks/mock-router";
+import { MockUsersFacade } from "../../../../testing/mocks/services/mock-users-facade.service";
+import { MockRouter } from "../../../../testing/mocks/services/mock-router";
 
 describe("UsersListPageComponent", () => {
   let component: UsersListPageComponent;

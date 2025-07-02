@@ -1,6 +1,6 @@
 import { signal } from "@angular/core";
 import { single } from "rxjs";
-import { User } from "../../app/shared/models/user";
+import { User } from "../../../app/shared/models/user";
 
 export class MockUsersFacade {
   users = signal([{ id: 1, username: "john", role: "user" }]);

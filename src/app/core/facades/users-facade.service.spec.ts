@@ -4,8 +4,8 @@ import { UserStore } from "../stores/users.store";
 import { UsersService } from "../services/users.service";
 import { of, throwError } from "rxjs";
 import { User } from "../../shared/models/user";
-import { MockUserStore } from "../../../testing/mocks/mock-user.store";
-import { MockUsersService } from "../../../testing/mocks/mock-user.service";
+import { MockUserStore } from "../../../testing/mocks/services/mock-user.store";
+import { MockUsersService } from "../../../testing/mocks/services/mock-user.service";
 
 const list: User[] = [
   { id: 1, username: "john", password: "pw", role: "user" } as User,
