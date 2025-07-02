@@ -12,12 +12,18 @@ export const USERS_ROUTES: Routes = [
   {
     path: "create",
     canActivate: [AdminGuard],
+    data: {
+      mode: "create",
+    },
     loadComponent: () => import("./user-form-page/user-form-page.component").then(c => c.UserFormPageComponent),
   },
   {
     path: ":id",
     resolve: {
       user: UserResolver,
+    },
+    data: {
+      mode: "edit",
     },
     loadComponent: () => import("./user-form-page/user-form-page.component").then(c => c.UserFormPageComponent),
   },
