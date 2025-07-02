@@ -8,14 +8,14 @@ export class UserStore {
   user = signal<User | null>(null);
   loggedInUser = signal<User | null>(null);
   loading = signal(false);
-  updating = signal(false);
+  saved = signal(false);
   error = signal("");
-  updatingError = signal("");
+  savingError = signal("");
 
   constructor() {
     try {
       const savedUser = JSON.parse(localStorage.getItem(USER_KEY) ?? "{}");
-      if (Object.entries(savedUser).length) this.setUser(savedUser);
+      if (Object.entries(savedUser).length) this.setLoggedInUser(savedUser);
     } catch (error) {}
   }
 
@@ -40,16 +40,16 @@ export class UserStore {
     this.loading.set(value);
   }
 
-  setUpdating(value: boolean) {
-    this.updating.set(value);
+  setSaved(value: boolean) {
+    this.saved.set(value);
   }
 
   setError(message: string) {
     this.error.set(message);
   }
 
-  setUpdatingError(message: string) {
-    this.updatingError.set(message);
+  setSavingError(message: string) {
+    this.savingError.set(message);
   }
 
   upsertUser(user: User) {
@@ -62,8 +62,8 @@ export class UserStore {
       updated[index] = user;
       this.users.set(updated);
       //Updating the current user
-      if (this.user()?.id === user.id) {
-        this.setUser({ ...user, password: undefined });
+      if (this.loggedInUser()?.id === user.id) {
+        this.setLoggedInUser({ ...user, password: undefined });
       }
     }
   }

@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { AdminGuard } from "../../shared/guards/admin.guard";
+import { UserResolver } from "../../core/resolvers/user-resolver";
 
 export const USERS_PATH = "users";
 
@@ -15,6 +16,9 @@ export const USERS_ROUTES: Routes = [
   },
   {
     path: ":id",
+    resolve: {
+      user: UserResolver,
+    },
     loadComponent: () => import("./user-form-page/user-form-page.component").then(c => c.UserFormPageComponent),
   },
 ];

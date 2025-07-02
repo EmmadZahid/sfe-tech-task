@@ -11,11 +11,11 @@ import { UsersFacadeService } from "../../../core/facades/users-facade.service";
   styleUrl: "./users-list-page.component.scss",
 })
 export class UsersListPageComponent implements OnInit {
-  usersfacade = inject(UsersFacadeService);
+  usersFacade = inject(UsersFacadeService);
   router = inject(Router);
 
   ngOnInit(): void {
-    this.usersfacade.loadUsers();
+    this.usersFacade.loadUsers();
   }
 
   goToNew(): void {
@@ -23,6 +23,7 @@ export class UsersListPageComponent implements OnInit {
   }
 
   goToEdit(id: number): void {
+    this.usersFacade.resetSaved();
     this.router.navigate(["/users", id]);
   }
 }

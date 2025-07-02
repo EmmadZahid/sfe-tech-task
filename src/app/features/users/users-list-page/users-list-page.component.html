@@ -1,14 +1,14 @@
 <div class="header">
   <h2>Users</h2>
-  @if (usersfacade.isLoggedInUserAdmin()) {
+  @if (usersFacade.isLoggedInUserAdmin()) {
   <button mat-raised-button color="primary" (click)="goToNew()">Add User</button>
   }
 </div>
-@if (!usersfacade.loading()) { @if(usersfacade.error()){
-<p class="app-error">{{ usersfacade.error() }}</p>
+@if (!usersFacade.loading()) { @if(usersFacade.error()){
+<p class="app-error">{{ usersFacade.error() }}</p>
 } @else{
 
-<app-users-list [users]="usersfacade.users()" (edit)="goToEdit($event)" />
+<app-users-list [users]="usersFacade.users()" (edit)="goToEdit($event)" />
 } } @else {
 <p>Loading...</p>
 }
