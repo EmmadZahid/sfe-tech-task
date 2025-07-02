@@ -3,10 +3,11 @@ import { UsersListComponent } from "../users-list/users-list.component";
 import { MatButton } from "@angular/material/button";
 import { Router } from "@angular/router";
 import { UsersFacadeService } from "../../../core/facades/users-facade.service";
+import { AppSpinnerComponent } from "../../../shared/components/app-spinner.component";
 
 @Component({
   selector: "app-users-list-page",
-  imports: [UsersListComponent, MatButton],
+  imports: [UsersListComponent, MatButton, AppSpinnerComponent],
   templateUrl: "./users-list-page.component.html",
   styleUrl: "./users-list-page.component.scss",
 })

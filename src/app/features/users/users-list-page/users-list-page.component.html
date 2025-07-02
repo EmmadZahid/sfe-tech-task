@@ -10,5 +10,5 @@
 
 <app-users-list [users]="usersFacade.users()" (edit)="goToEdit($event)" />
 } } @else {
-<p>Loading...</p>
+<app-spinner></app-spinner>
 }

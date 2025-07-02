@@ -38,6 +38,7 @@ export class UsersFacadeService {
   }
 
   getUserById(id: number): void {
+    this.store.setLoading(true);
     this.api.getUserById(id).subscribe({
       next: user => {
         this.store.setUser(user);

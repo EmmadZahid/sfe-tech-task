@@ -4,10 +4,11 @@ import { User } from "../../../shared/models/user";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UsersFacadeService } from "../../../core/facades/users-facade.service";
 import { MatButtonModule } from "@angular/material/button";
+import { AppSpinnerComponent } from "../../../shared/components/app-spinner.component";
 
 @Component({
   selector: "app-user-form-page",
-  imports: [UserFormComponent, MatButtonModule],
+  imports: [UserFormComponent, MatButtonModule, AppSpinnerComponent],
   templateUrl: "./user-form-page.component.html",
   styleUrl: "./user-form-page.component.scss",
 })
