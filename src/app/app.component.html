@@ -1,7 +1,7 @@
 <header>
   <h2>{{ title }}</h2>
   @if(token()){
-  <a href="#" (click)="onLogoutClick($event)">Logout</a>
+  <a data-testid="logout" href="#" (click)="onLogoutClick($event)">Logout</a>
   }
 </header>
 
