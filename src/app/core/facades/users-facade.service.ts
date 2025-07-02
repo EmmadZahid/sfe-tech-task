@@ -75,4 +75,9 @@ export class UsersFacadeService {
     this.store.setSavingError("");
     this.store.setSaving(false);
   }
+
+  resetLoading(): void {
+    this.store.setLoading(false);
+    this.store.setError("");
+  }
 }
