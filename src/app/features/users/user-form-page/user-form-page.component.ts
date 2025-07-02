@@ -20,6 +20,7 @@ export class UserFormPageComponent {
   loading = this.usersfacade.loading;
   error = this.usersfacade.error;
   savingError = this.usersfacade.savingError;
+  saving = this.usersfacade.saving;
   mode = signal(this.route.snapshot.data["mode"]);
   constructor() {
     effect(() => {

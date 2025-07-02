@@ -8,6 +8,7 @@ export class UserStore {
   user = signal<User | null>(null);
   loggedInUser = signal<User | null>(null);
   loading = signal(false);
+  saving = signal(false);
   saved = signal(false);
   error = signal("");
   savingError = signal("");
@@ -38,6 +39,10 @@ export class UserStore {
 
   setLoading(value: boolean) {
     this.loading.set(value);
+  }
+
+  setSaving(value: boolean) {
+    this.saving.set(value);
   }
 
   setSaved(value: boolean) {

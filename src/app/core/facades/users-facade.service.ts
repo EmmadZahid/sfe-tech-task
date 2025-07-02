@@ -13,6 +13,7 @@ export class UsersFacadeService {
   user = this.store.user.asReadonly();
   loggedInUser = this.store.loggedInUser.asReadonly();
   loading = this.store.loading.asReadonly();
+  saving = this.store.saving.asReadonly();
   saved = this.store.saved.asReadonly();
   error = this.store.error.asReadonly();
   savingError = this.store.savingError.asReadonly();
@@ -52,16 +53,18 @@ export class UsersFacadeService {
 
   saveUser(user: Partial<User>): void {
     const action = user.id ? this.api.editUser(user) : this.api.addUser(user);
-
+    this.store.setSaving(true);
     this.store.setSavingError("");
     action.subscribe({
       next: saved => {
         this.store.upsertUser(saved);
         this.store.setSavingError("");
         this.store.setSaved(true);
+        this.store.setSaving(false);
       },
       error: err => {
         this.store.setSavingError("Failed to save user");
+        this.store.setSaving(false);
       },
     });
   }

@@ -4,7 +4,7 @@
 <p class="app-error">{{ error() }}</p>
 <button mat-flat-button color="primary" (click)="goBack()">Go Back</button>
 } @else {
-<app-user-form [user]="user()" (save)="handleSave($event)" (cancel)="goBack()" [disableSave]="loading()" />
+<app-user-form [user]="user()" (save)="handleSave($event)" (cancel)="goBack()" [disableSave]="saving()" />
 } } @else {
 <p>Loading...</p>
 } @if(savingError()){
