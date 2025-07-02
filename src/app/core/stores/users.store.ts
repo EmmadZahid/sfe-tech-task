@@ -1,7 +1,7 @@
 import { Injectable, effect, signal } from "@angular/core";
 import { User } from "../../shared/models/user";
 
-const USER_KEY = "user";
+export const USER_KEY = "user";
 @Injectable({ providedIn: "root" })
 export class UserStore {
   users = signal<User[]>([]);
